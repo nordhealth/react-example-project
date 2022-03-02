@@ -1,6 +1,80 @@
-# Getting Started with Create React App
+# react-example-project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This repo is an example of using [React](https://reactjs.org/) / [Create React App (CRA)](https://github.com/facebook/create-react-app) along with [Nord Design System's](https://nordhealth.design/) [components](https://nordhealth.design/components/). Typescript is used, but this is not a necessity for using React and Nord together.
+
+This repo can be forked as a starting point for new apps. However, you may wish to undertake the process yourself so that all dependencies are up to date, and you can choose which tools you would like to use. The commit history shows the steps taken to integrate React and Nord. Those steps are described next.
+
+## Setting up a project from scratch
+
+First initialize a new CRA project:
+
+```sh
+npx create-react-app [project-name]
+```
+
+Or if you would like to start with Typescript:
+
+```sh
+npx create-react-app [project-name] --template typescript
+```
+
+Follow any instructions printed in the terminal.
+
+Next install Nord dependencies:
+
+```sh
+npm install @nordhealth/react @nordhealth/css --save
+```
+
+When complete, open your editor and navigate to `index.js` or `index.tsx`, and import the Nord CSS:
+
+```jsx
+// index.js
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import "@nordhealth/css";
+import App from "./App";
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+```
+
+This will ensure Nord styles are included in your app.
+
+Now everything is ready! In a component file, you can start using Nord:
+
+```jsx
+import { useState } from "react";
+import { Input, Button } from "@nordhealth/react";
+
+function Example() {
+  const [name, setName] = useState("");
+  const [count, setCount] = useState(0);
+
+  function handleNameChange(e) {
+    setName(e.target.value);
+  }
+  function increment() {
+    setCount(count + 1);
+  }
+
+  return (
+    <>
+      <Input label="Your name" value={name} onInput={handleNameChange} />
+      <p>{name}</p>
+
+      <Button variant="primary" onClick={increment}>
+        Count: {count}
+      </Button>
+    </>
+  );
+}
+```
 
 ## Available Scripts
 
