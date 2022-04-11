@@ -24,7 +24,7 @@ function useField(name: string, initialValue = "") {
     inputProps: {
       name,
       value,
-      onInput: (e: FormEvent | Event) => {
+      onInput: (e: Event) => {
         const input = e.target as InputType;
         setValue(input.value);
       },
@@ -38,7 +38,7 @@ export function Login() {
   const username = useField("username");
   const password = useField("password");
 
-  function handleSubmit(e: any) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     if (username.valid && password.valid) {
