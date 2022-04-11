@@ -4,6 +4,7 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "@nordhealth/components": "^1.0.0-rc.8",
     "@nordhealth/css": "latest",
     "@nordhealth/react": "latest",
     "@testing-library/jest-dom": "^5.16.2",
