@@ -7,7 +7,7 @@ import type { Input as InputType } from "@nordhealth/components";
 function useField(name: string, initialValue = "") {
   const [value, setValue] = useState(initialValue);
   const [error, setError] = useState<string>();
-  const ref = useRef<InputType>();
+  const ref = useRef<InputType>(null);
   const valid = Boolean(value);
 
   useEffect(() => {
