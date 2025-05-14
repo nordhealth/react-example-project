@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from "react";
 import './App.css'
+import type { Input } from "@nordhealth/components";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [name, setName] = useState("");
+  const [count, setCount] = useState(0);
+
+  function handleNameChange(e: React.ChangeEvent<Input>) {
+    setName(e.target.value);
+  }
+
+  function increment() {
+    setCount(count + 1);
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <nord-input label="Your name" value={name} onInput={handleNameChange}></nord-input>
+      <p>{name}</p>
+
+      <nord-button variant="primary" onClick={increment}>
+        Count: {count}
+      </nord-button>
     </>
-  )
+  );
 }
 
 export default App
