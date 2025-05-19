@@ -1,5 +1,6 @@
-.stack {
-  inline-size: 90%;
-  max-inline-size: 340px;
-  margin: var(--n-space-xl) auto;
+#root {
+  max-inline-size: 1280px;
+  margin: 0 auto;
+  padding: var(--n-space-xl);
+  text-align: center;
 }

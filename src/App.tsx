@@ -1,21 +1,29 @@
-import React from "react";
-import { Header, Stack } from "@nordhealth/react";
-import "./App.css";
-import { Login } from "./Login";
+import { useState } from "react";
+import './App.css'
+import type { Input } from "@nordhealth/components";
 
 function App() {
+  const [name, setName] = useState("");
+  const [count, setCount] = useState(0);
+
+  function handleNameChange(e: React.ChangeEvent<Input>) {
+    setName(e.target.value);
+  }
+
+  function increment() {
+    setCount(count + 1);
+  }
+
   return (
     <>
-      <Header>
-        <h1 className="n-typescale-l">Nord / React Example</h1>
-      </Header>
-      <main className="n-reset n-stack-horizontal">
-        <Stack className="stack">
-          <Login />
-        </Stack>
-      </main>
+      <nord-input label="Your name" value={name} onInput={handleNameChange}></nord-input>
+      <p>{name}</p>
+
+      <nord-button variant="primary" onClick={increment}>
+        Count: {count}
+      </nord-button>
     </>
   );
 }
 
-export default App;
+export default App

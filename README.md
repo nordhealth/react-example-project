@@ -1,21 +1,21 @@
 # react-example-project
 
-This repo is an example of using [React](https://reactjs.org/) / [Create React App (CRA)](https://github.com/facebook/create-react-app) along with [Nord Design System's](https://nordhealth.design/) [components](https://nordhealth.design/components/). Typescript is used, but this is not a necessity for using React and Nord together.
+This repo is an example of using [React](https://reactjs.org/) with [Vite](https://vite.dev/) along with [Nord Design System's](https://nordhealth.design/) [components](https://nordhealth.design/components/). TypeScript is used, but this is not a necessity for using React and Nord together.
 
-This repo can be forked as a starting point for new apps. However, you may wish to undertake the process yourself so that all dependencies are up to date, and you can choose which tools you would like to use. The commit history shows the steps taken to integrate React and Nord. Those steps are described next.
+This repo can be forked as a starting point for new apps. However, you may wish to undertake the process yourself so that all dependencies are up to date, and you can choose which tools you would like to use. The steps to integrate React and Nord are described next.
 
 ## Setting up a project from scratch
 
-First initialize a new CRA project:
+First initialize a new Vite project with React:
 
 ```sh
-npx create-react-app [project-name]
+npm create vite@latest [project-name] -- --template react
 ```
 
-Or if you would like to start with Typescript:
+Or if you would like to start with TypeScript:
 
 ```sh
-npx create-react-app [project-name] --template typescript
+npm create vite@latest [project-name] -- --template react-ts
 ```
 
 Follow any instructions printed in the terminal.
@@ -26,31 +26,41 @@ Next install Nord dependencies:
 npm install @nordhealth/react @nordhealth/css --save
 ```
 
-When complete, open your editor and navigate to `index.js` or `index.tsx`, and import the Nord CSS:
+When complete, open your editor and navigate to `main.jsx` or `main.tsx`, and import the Nord dependencies:
 
 ```jsx
-// index.js
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import "@nordhealth/css";
-import App from "./App";
+// main.jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.tsx'
 
-ReactDOM.render(
-  <React.StrictMode>
+import '@nordhealth/css';
+import '@nordhealth/components';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  </StrictMode>,
+)
 ```
 
-This will ensure Nord styles are included in your app.
+This will ensure Nord styles are included in your app, and register all Web Components ready for use.
+
+To get types and IntelliSense for Nord components in JSX, add the following to your `tsconfig.json` in a TypeScript project, or `jsconfig.json` in a JavaScript project:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["@nordhealth/components/lib/react.d.ts"]
+  }
+}
+```
 
 Now everything is ready! In a component file, you can start using Nord:
 
 ```jsx
 import { useState } from "react";
-import { Input, Button } from "@nordhealth/react";
 
 function Example() {
   const [name, setName] = useState("");
@@ -59,65 +69,49 @@ function Example() {
   function handleNameChange(e) {
     setName(e.target.value);
   }
+
   function increment() {
     setCount(count + 1);
   }
 
   return (
     <>
-      <Input label="Your name" value={name} onInput={handleNameChange} />
+      <nord-input label="Your name" value={name} onInput={handleNameChange}></nord-input>
       <p>{name}</p>
 
-      <Button variant="primary" onClick={increment}>
+      <nord-button variant="primary" onClick={increment}>
         Count: {count}
-      </Button>
+      </nord-button>
     </>
   );
 }
+
+export default Example
 ```
 
-## Available Scripts
+## Customize configuration
 
-In the project directory, you can run:
+See [Vite Configuration Reference](https://vite.dev/config/).
 
-### `npm start`
+## Project Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clone this repo, then:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```sh
+npm install
+```
 
-### `npm test`
+### Compile and Hot-Reload for Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```sh
+npm run dev
+```
 
-### `npm run build`
+### Type-Check, Compile and Minify for Production
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+npm run build
+```
 
 ## Can I use Nord in my own project?
 
@@ -129,4 +123,4 @@ If you experience any issues while getting started with any of Nord’s tools, p
 
 ## Copyright
 
-Copyright © 2022 Nordhealth Ltd.
+Copyright © 2025 Nordhealth Ltd.
